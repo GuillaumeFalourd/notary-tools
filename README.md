@@ -4,7 +4,10 @@
 
 ☞ Github Action to **notarize** and **staple** macOS applications or packages. 
 
-It does this by submitting your built `.app`, `.pkg` or `.dmg` file to Apple's notary service (by using `xcrun notarytool`) and staple the product (by using `xcrun stapler`).
+It does this by:
+- storing credentials on keychain (by using `xcrun notarytool store-credentials`)
+- submitting a built `.app`, `.pkg` or `.dmg` file to Apple's notary service (by using `xcrun notarytool submit`) 
+- stapling the product (by using `xcrun stapler`).
 
 [Reference]([notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734))
 
