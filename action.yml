@@ -1,0 +1,68 @@
+name: 'Xcode Notarization'
+
+description: 'Action to notarize (xcrun notarytool) and staple (xcrun stapler) a Mac application or package.'
+
+inputs:
+  product_path:
+    description: 'Path of the software to notarize'
+    requires: true
+  apple_id:
+    description: 'notarytool --apple-id parameter (Developer Apple ID)'
+    required: true
+  password:
+    description: 'notarytool --password parameter (App-specific password for your Apple ID)'
+    required: true
+  team_id:
+    description: 'notarytool --team-id parameter (Developer Team ID)'
+    required: true
+  keychain_profile:
+    description: 'notarytool --keychain-profile parameter'
+    required: true
+  staple:
+    description: 'Whether to staple the notarized product'
+    requires: false
+    default: 'true'
+  xcode_path:
+    description: 'Path of the Xcode version to use'
+    required: false
+    default: '/Applications/Xcode_13.2.1.app' # available on both macos-11 and macos-12 environments
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Xcode
+      run: sudo xcode-select -s ${{ inputs.xcode_path }}
+      shell: bash
+
+    - name: Prepare Notarization Credentials
+      run: |
+        # create temporary keychain
+        KEYCHAIN_PATH=$RUNNER_TEMP/notarization.keychain-db
+        KEYCHAIN_PASS=$(uuidgen)
+        security create-keychain -p "${KEYCHAIN_PASS}" ${KEYCHAIN_PATH}
+        security set-keychain-settings -lut 900 ${KEYCHAIN_PATH}
+        security unlock-keychain -p "${KEYCHAIN_PASS}" ${KEYCHAIN_PATH}
+        # import credentials from secrets
+        xcrun notarytool store-credentials "${{ inputs.keychain_profile }}" --apple-id "${{ inputs.apple_id }}" --password "${{ inputs.password }}" --team-id "${{ inputs.team_id }}" --keychain "${KEYCHAIN_PATH}"
+      shell: bash
+
+    - name: Notarize ${{ inputs.product_path }}
+      run: |
+        KEYCHAIN_PATH=$RUNNER_TEMP/notarization.keychain-db
+        xcrun notarytool submit ${{ inputs.product_path }} --keychain-profile "${{ inputs.keychain_profile }}" --keychain "${KEYCHAIN_PATH}" --wait
+      shell: bash
+
+    - name: Staple
+      if: ${{ inputs.staple == 'true' }}
+      run: xcrun stapler staple ${{ inputs.product_path }}
+      shell: bash
+
+    - name: Cleanup
+      if: ${{ always() }}
+      run: security delete-keychain $RUNNER_TEMP/notarization.keychain-db
+      shell: bash
+      continue-on-error: true
+
+branding:
+  icon: 'edit'
+  color: 'green'
