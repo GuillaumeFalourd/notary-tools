@@ -4,7 +4,7 @@ description: 'Action to notarize (xcrun notarytool) and staple (xcrun stapler) a
 
 inputs:
   product_path:
-    description: 'Path of the software to notarize'
+    description: 'Path of the software to notarize (Support .app, .dmg and .pkg)'
     requires: true
   apple_id:
     description: 'notarytool --apple-id parameter (Developer Apple ID)'
@@ -17,7 +17,8 @@ inputs:
     required: true
   keychain_profile:
     description: 'notarytool --keychain-profile parameter'
-    required: true
+    required: false
+    default: 'notarization'
   staple:
     description: 'Whether to staple the notarized product'
     requires: false
