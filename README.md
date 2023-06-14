@@ -21,6 +21,7 @@ steps:
     apple_id: ${{ secrets.APPLE_ID }}
     password: ${{ secrets.PASSWORD }}
     team_id: ${{ secrets.TEAM_ID }}
+    # Not mandatory inputs
     staple: 'false'
     keychain_profile: 'my-keychain-profile'
     xcode_path: '/Applications/Xcode_13.3.app'
