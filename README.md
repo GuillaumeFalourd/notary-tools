@@ -30,13 +30,13 @@ steps:
 
 Field | Mandatory | Observation
 ------------ | ------------  | -------------
-**product_path** | YES | Path to the product to notarize. </b> e.g: `path/to/product`
+**product_path** | YES | Path to the product to notarize. <br/> _e.g: `path/to/product`_
 **apple_id** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --apple-id parameter
 **password** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --password parameter
 **team_id** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --team-id parameter.
-**keychain_profile** | NO | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --keychain-profile parameter (default `notarization`.)
-**staple** | NO | Whether to staple the notarized product (default `true`).
-**xcode_path** | NO | Path of the Xcode version to use (default `/Applications/Xcode_13.2.1.app`).
+**keychain_profile** | NO | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --keychain-profile parameter <br/> (default `notarization`.)
+**staple** | NO | Whether to staple the notarized product <br/> (default `true`).
+**xcode_path** | NO | Path of the Xcode version to use <br/> (default `/Applications/Xcode_13.2.1.app`).
 
 ## 🤝 Contributing
 
