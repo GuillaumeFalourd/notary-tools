@@ -1,4 +1,4 @@
-name: 'Xcode Notarization'
+name: 'Notary Tools'
 
 description: 'Action to notarize (xcrun notarytool) and staple (xcrun stapler) a Mac application or package.'
 
