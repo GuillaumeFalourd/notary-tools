@@ -34,9 +34,9 @@ Field | Mandatory | Observation
 **apple_id** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --apple-id parameter
 **password** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --password parameter
 **team_id** | YES | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --team-id parameter.
-**keychain_profile** | NO | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --keychain-profile parameter <br/> (default `notarization`.)
-**staple** | NO | Whether to staple the notarized product <br/> (default `true`).
-**xcode_path** | NO | Path of the Xcode version to use <br/> (default `/Applications/Xcode_13.2.1.app`).
+**keychain_profile** | NO | [notarytool](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087734) --keychain-profile parameter <br/> _Default `notarization`_
+**staple** | NO | Whether to staple the notarized product <br/> _Default `true`_
+**xcode_path** | NO | Path of the Xcode version to use <br/> _Default `/Applications/Xcode_13.2.1.app`_
 
 ## 🤝 Contributing
 
